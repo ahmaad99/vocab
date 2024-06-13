@@ -8,7 +8,7 @@ from pathlib import Path
 
 directory_path = Path('word_list/')
 file_names = [f.name for f in directory_path.iterdir() if f.is_file()]
-option_tuple = tuple(file_names[1:])
+option_tuple = tuple(file_names)
 option = st.selectbox(
     'Select an option:',
     option_tuple
