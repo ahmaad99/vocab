@@ -24,7 +24,7 @@ if not st.session_state.execute:
 
 if st.session_state.execute:
 
-    str = f"/Users/g.k./Desktop/word_list/{option}"
+    str = f"word_list/{option}"
     df = pd.read_csv(str)
 
     def make_temp_list():
