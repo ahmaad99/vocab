@@ -27,9 +27,9 @@ if st.session_state.execute:
     str = f"word_list/{option}"
     df = pd.read_csv(str)
 
-    def make_temp_list():
+    def make_temp_list(str):
 
-        df = pd.read_csv('data/list5.csv')
+        df = pd.read_csv(str)
 
         # Example array
         arr = [i for i in range(len(df['word']))]  # An array with 100 elements
@@ -46,7 +46,7 @@ if st.session_state.execute:
     if 'question_index' not in st.session_state:
         st.session_state.question_index = 0
         st.session_state.answers = []
-        st.session_state.random_numbers = make_temp_list()
+        st.session_state.random_numbers = make_temp_list(str)
         st.session_state.answer_index = 0
         st.session_state.correct_answers = []
         st.session_state.sentence_seq = []
@@ -71,46 +71,6 @@ if st.session_state.execute:
                           index=0, key=f"q{st.session_state.question_index}")
 
         return list_a.index(answer), list_a[-1]
-
-    def make_seq(wrong_arr, no, status):
-
-        df = pd.read_csv('data/seq_ques.csv')
-        df1 = pd.read_csv('data/words.csv')
-
-        df.at[no, 'wrong_word'] = str(wrong_arr)
-        df.at[no, 'status'] = status
-
-        prev_seq = df.at[no, 'test_seq']
-
-        wrong_seq = df.at[no, 'wrong_word']
-
-        prev_seq = eval(prev_seq)
-
-        wrong_seq = eval(wrong_seq)
-
-        range_values = list(range(len(df1['word'])))
-
-        range_values = [
-            x for x in range_values if x not in prev_seq + wrong_seq]
-
-        combined_sources = [prev_seq, wrong_seq, range_values]
-
-        combined_probs = [0.10, 0.25, 0.65]
-
-        def weighted_random_choice():
-            chosen_list = random.choices(
-                combined_sources, weights=combined_probs, k=1)[0]
-            return random.choice(chosen_list) if chosen_list else None
-
-        num_elements = 30
-        result_array = [weighted_random_choice() for _ in range(num_elements)]
-
-        result_array = [x for x in result_array if x is not None]
-
-        df.at[no+1, 'test_seq'] = str(result_array)
-
-        df.to_csv('data/seq_ques.csv', index=False)
-        return 1
 
     # Function to calculate the score
 
