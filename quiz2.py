@@ -110,8 +110,9 @@ if st.session_state.execute:
                 f"Your answer: {list_a[st.session_state.answers[i]]}")
             st.write(
                 f"Correct answer: {list_a[st.session_state.correct_answers[i]]}")
-            ind = arr.index(list_a[st.session_state.correct_answers[i]])
+            
             if list_a[st.session_state.correct_answers[i]] in list(df3['Word']):
+                ind = arr.index(list_a[st.session_state.correct_answers[i]])
                 string = f"Meaning: {df3.loc[ind, 'Definition']}"
             else:
                 string = "Not in Vocabulary list....use chatgpt"
