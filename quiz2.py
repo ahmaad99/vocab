@@ -16,9 +16,9 @@ option = st.selectbox(
 str = f"word_list/{option}"
 df = pd.read_csv(str)
 up_bound = st.number_input(
-    f"Enter a bound between 0 and {len(df['word'])}:", step=1, format="%d")
+    f"Enter an upper bound between 0 and {len(df['word'])}:", step=1, format="%d")
 down_bound = st.number_input(
-    f"Enter a bound between 0 and {len(df['word'])}:", step=1, format="%d")
+    f"Enter a lower bound between 0 and {len(df['word'])}:", step=1, format="%d")
 df = df[down_bound:up_bound]
 
 if 'execute' not in st.session_state:
