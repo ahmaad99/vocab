@@ -14,7 +14,7 @@ option = st.selectbox(
     option_tuple
 )
 
-df = pd.read_csv(str)
+df = pd.read_csv(f"data/{option}")
 bound = st.number_input(
     f"Enter a bound between 0 and {len(df['word'])}:", step=1, format="%d")
 df = df[:bound]
