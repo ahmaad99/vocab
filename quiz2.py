@@ -14,6 +14,11 @@ option = st.selectbox(
     option_tuple
 )
 
+df = pd.read_csv(str)
+bound = st.number_input(
+    f"Enter a bound between 0 and {len(df['word'])}:", step=1, format="%d")
+df = df[:bound]
+
 if 'execute' not in st.session_state:
     st.session_state.execute = False
 
@@ -24,8 +29,7 @@ if not st.session_state.execute:
 
 if st.session_state.execute:
 
-    str = f"word_list/{option}"
-    df = pd.read_csv(str)
+
 
     def make_temp_list(str):
 
