@@ -15,9 +15,11 @@ option = st.selectbox(
 )
 str = f"word_list/{option}"
 df = pd.read_csv(str)
-bound = st.number_input(
+up_bound = st.number_input(
     f"Enter a bound between 0 and {len(df['word'])}:", step=1, format="%d")
-df = df[:bound]
+down_bound = st.number_input(
+    f"Enter a bound between 0 and {len(df['word'])}:", step=1, format="%d")
+df = df[down_bound:up_bound]
 
 if 'execute' not in st.session_state:
     st.session_state.execute = False
@@ -31,9 +33,9 @@ if st.session_state.execute:
 
 
 
-    def make_temp_list(str):
+    def make_temp_list(df):
 
-        df = pd.read_csv(str)
+        df = df
 
         # Example array
         arr = [i for i in range(len(df['word']))]  # An array with 100 elements
@@ -50,7 +52,7 @@ if st.session_state.execute:
     if 'question_index' not in st.session_state:
         st.session_state.question_index = 0
         st.session_state.answers = []
-        st.session_state.random_numbers = make_temp_list(str)
+        st.session_state.random_numbers = make_temp_list(df)
         st.session_state.answer_index = 0
         st.session_state.correct_answers = []
         st.session_state.sentence_seq = []
