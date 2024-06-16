@@ -13,8 +13,8 @@ option = st.selectbox(
     'Select an option:',
     option_tuple
 )
-
-df = pd.read_csv(f"word_list/{option}")
+str = f"word_list/{option}"
+df = pd.read_csv(str)
 bound = st.number_input(
     f"Enter a bound between 0 and {len(df['word'])}:", step=1, format="%d")
 df = df[:bound]
