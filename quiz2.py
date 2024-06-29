@@ -21,8 +21,6 @@ down_bound = st.number_input(
     f"Enter a lower bound between 0 and {len(df['word'])}:", step=1, format="%d")
 df = df[down_bound:up_bound]
 
-
-
 if 'execute' not in st.session_state:
     st.session_state.execute = False
 
